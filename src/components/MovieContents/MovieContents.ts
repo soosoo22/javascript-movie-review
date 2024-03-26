@@ -1,32 +1,21 @@
 import './style.css';
 import Movie from '../../domain/Movie';
-import createMovieItems from '../MovieItems/MovieItems';
-import createShowMoreButton from '../ShowMoreButton/ShowMoreButton';
 import { PropsType } from '../../types/props';
+import Skeleton from '../Skeleton/Skeleton';
+import DOM from '../../utils/DOM';
+import MovieListManager from '../MovieList/MovieList';
 
-const createMovieContents = {
-  async execute(title: string) {
+const { $ } = DOM;
+
+const MovieContentManager = {
+  renderMain(title: string) {
     const main = document.createElement('main');
-    const repeatHtml = /* html */ `
-    <li>
-    <a href="#">
-      <div class="item-card">
-        <div class="item-thumbnail skeleton"></div>
-        <div class="item-title skeleton"></div>
-        <div class="item-score skeleton"></div>
-      </div>
-    </a>
-  </li>
-    `;
-    const skeleton = /* html */ `
-    <ul class="item-list item-list--skeleton">
-    ${repeatHtml.repeat(20)}
-  </ul>
-  `;
+
     const templates = /* html */ `
       <section class="item-view">
-      <h2>${title}</h2>
-      ${skeleton}
+        <h2>${title}</h2>
+        <div class="item-container"></div>
+        <button class="btn primary full-width">더 보기</button>
       </section>
       `;
 
@@ -37,28 +26,30 @@ const createMovieContents = {
 
   async renderMovieData({ type, input }: PropsType) {
     const movie = new Movie();
-    const { movieItems, isLastPage } = await this.setMovieData(movie, { type, input });
-    document.querySelector('.item-view')?.appendChild(movieItems);
+    const { movieList, isLastPage } = await this.setMovieData(movie, { type, input });
+
+    MovieListManager.renderMovieList(movieList, isLastPage);
 
     if (!isLastPage) {
-      const showMoreButton = createShowMoreButton();
-      document.querySelector('.item-view')?.appendChild(showMoreButton);
       this.setEventListener(movie, { type, input });
     }
   },
 
   async setMovieData(movie: Movie, { type, input }: PropsType) {
-    const { movieList, isLastPage } = await movie.handleMovieData(type, input);
-    const movieItems = createMovieItems(movieList, isLastPage);
+    $('.item-container')?.appendChild(Skeleton.render(20));
 
-    return { movieItems, isLastPage };
+    const { movieList, isLastPage } = await movie.handleMovieData(type, input);
+
+    return { movieList, isLastPage };
   },
 
   setEventListener(movie: Movie, { type, input }: PropsType) {
-    document.querySelector('.btn')?.addEventListener('click', () => {
-      this.setMovieData(movie, { type, input });
+    $('.btn')?.addEventListener('click', async () => {
+      const { movieList, isLastPage } = await this.setMovieData(movie, { type, input });
+
+      MovieListManager.renderMovieList(movieList, isLastPage);
     });
   },
 };
 
-export default createMovieContents;
+export default MovieContentManager;
