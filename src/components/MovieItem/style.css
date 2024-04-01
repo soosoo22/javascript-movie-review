@@ -5,25 +5,55 @@
 
 .item-thumbnail {
   border-radius: 8px;
+<<<<<<< HEAD
   width: 180px;
   height: 270px;
   background-size: contain;
+=======
+  background-size: contain;
+  width: 300px;
+  height: 450px;
+>>>>>>> step2
 }
 
 .item-title {
   margin-top: 16px;
+<<<<<<< HEAD
   font-size: 1.2rem;
+=======
+  font-size: 1.5rem;
+>>>>>>> step2
   font-weight: bold;
 }
 
 .item-score {
+<<<<<<< HEAD
   display: flex;
   align-items: center;
   margin-top: 16px;
   font-size: 1.2rem;
+=======
+  margin-top: 16px;
+}
+
+.item-score span {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+>>>>>>> step2
   gap: 11px;
 }
 
 .item-score::after {
   margin-left: 8px;
 }
+<<<<<<< HEAD
+=======
+
+@media screen and (max-width: 380px) {
+  .item-thumbnail {
+    width: 150px;
+    height: auto;
+  }
+}
+>>>>>>> step2

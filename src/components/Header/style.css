@@ -1,6 +1,9 @@
 header {
   width: 100%;
+<<<<<<< HEAD
   min-width: 1200px;
+=======
+>>>>>>> step2
   height: 72px;
   background-color: #222;
   display: flex;
@@ -20,7 +23,11 @@ header h1 {
   color: #f33f3f;
 }
 
+<<<<<<< HEAD
 header > .search-box {
+=======
+header .search-box {
+>>>>>>> step2
   background: #fff;
   padding: 8px;
   border-radius: 4px;
@@ -28,6 +35,11 @@ header > .search-box {
 
 header .search-box > input {
   border: 0;
+<<<<<<< HEAD
+=======
+  width: 20rem;
+  transition: width 0.5s ease;
+>>>>>>> step2
 }
 
 header .search-box > .search-button {
@@ -37,3 +49,18 @@ header .search-box > .search-button {
   background: url('./../../images/search_button.png') transparent no-repeat 0 1px;
   background-size: contain;
 }
+<<<<<<< HEAD
+=======
+
+@media screen and (max-width: 570px) {
+  header .search-box input {
+    width: 10rem;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  header .search-box input {
+    width: 2rem;
+  }
+}
+>>>>>>> step2

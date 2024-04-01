@@ -5,6 +5,7 @@ function validateSelector(selector: string) {
 }
 
 const DOM = {
+<<<<<<< HEAD
   $: (selector: string, target: HTMLElement | Document = document) => {
     try {
       validateSelector(selector);
@@ -21,6 +22,15 @@ const DOM = {
       alert(error);
       return [];
     }
+=======
+  $: <T extends Element>(selector: string, target: Element | Document = document) => {
+    validateSelector(selector);
+    return target.querySelector<T>(selector);
+  },
+  $$: <T extends Element>(selector: string, target: Element | Document = document) => {
+    validateSelector(selector);
+    return target.querySelectorAll<T>(selector);
+>>>>>>> step2
   },
 };
 
